@@ -31,7 +31,7 @@ class Board
 
     self.grid.each do |row|
       row.each_index do |i|
-        pos = [6,i]
+        pos = [row_indx,i]
 
         self[pos] = Pawn.new(pos, self, color)
       end

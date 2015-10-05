@@ -13,4 +13,5 @@ class Queen < SlidingPiece
   def initialize(position, board, color)
     super
   end
+  
 end

@@ -23,4 +23,8 @@ class Pawn < SteppingPiece
     end
   end
 
+  def to_s
+    self.color == :b ? "\u265F".encode('utf-8') : "\u2659".encode('utf-8')
+  end
+
 end
