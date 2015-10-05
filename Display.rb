@@ -7,11 +7,6 @@ class Display
   def initialize(board)
     @board = board
     @cursor_pos =  [0,0]
-    if @board[@cursor_pos].nil?
-      @selected = false
-    else
-      @selected = true
-    end
   end
 
   def build_grid
@@ -22,7 +17,9 @@ class Display
 
   def build_row(row, i)
     row.map.with_index do |piece, j|
-      color_options = colors_for(i, j)
+      piece.to_s.colorize(:blue)
+      # color_options = colors_for(i, j)
+      # piece.to_s.colorize(color_options)
     end
   end
 
@@ -34,7 +31,7 @@ class Display
     else
       bg = :blue
     end
-    { background: bg, color: :white}
+    { background: bg, color: :red }
   end
 
   def render
