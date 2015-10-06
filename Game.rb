@@ -38,10 +38,14 @@ if $PROGRAM_NAME == __FILE__
   x = Board.new
   pos = [3,4]
   x[pos] = Rook.new(pos, x, :w)
-  x[[4,4]] = King.new([4,4], x, :b)
   x[[7, 3]] = nil
-  p x.in_check?(:b)
-  game = Game.new(x)
+  x[[4, 3]] = King.new([4,3], x, :b)
+  king = x[[4, 3]]
+  p king.valid_moves
+  #p x.deep_dup
+  #p x.in_check?(:b)
   #
+  game = Game.new(x)
   game.play
+
 end

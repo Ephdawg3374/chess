@@ -5,7 +5,8 @@ class MoveError < StandardError
 end
 
 class Board
-  attr_reader :dimensions, :grid
+  attr_reader :dimensions
+  attr_accessor :grid
 
   def initialize
     @dimensions = 8
@@ -58,6 +59,8 @@ class Board
   end
 
   def in_check?(color)
+    return true if checkmate?(color)
+
     king_pos = nil
 
     rows.each_with_index do |row, row_num|
@@ -73,10 +76,13 @@ class Board
     end
     #p enemy_pieces
     enemy_pieces.any? do |piece|
-
       piece.valid_moves.include?(king_pos)
-      # print "#{piece.valid_moves} #{piece.class}\n"
     end
+  end
+
+  def checkmate?(color)
+
+
   end
 
   def move(start, end_pos)
@@ -92,8 +98,26 @@ class Board
     x.between?(0, @dimensions - 1) && y.between?(0, @dimensions - 1)
   end
 
+  def deep_dup
+    copy = []
+
+    @grid.each do |row|
+      sub_copy = []
+
+      row.each { |el| sub_copy << el.dup if !el.nil? }
+
+      copy << sub_copy
+    end
+    result = Board.new
+
+    result.grid = copy
+    result
+  end
+
   def rows
     @grid
   end
+
+
 
 end

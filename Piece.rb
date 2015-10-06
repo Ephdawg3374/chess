@@ -1,5 +1,6 @@
 class Piece
   attr_reader :position, :color
+
   def initialize(position, board, color)
     @color = color
     @position = position
@@ -29,11 +30,18 @@ class Piece
     " "
   end
 
-  def valid_moves
+  def move_into_check?(pos) #==valid_moves
+    new_board = @board.deep_dup
+    new_board[@position] = nil
+    new_board[pos] = self
+    new_board.in_check?(self.color)
+  end
+
+  def valid_moves #== moves
     possible_moves = self.moves
 
     possible_moves.select! do |move|
-      @board[move].nil? || @board[move].color != self.color
+      (@board[move].nil? || @board[move].color != self.color) #&& (move_into_check_flag && !move_into_check)
     end
 
       # @board[move].nil? || @board[move].color != self.color

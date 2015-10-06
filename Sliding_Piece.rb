@@ -11,26 +11,22 @@ class SlidingPiece < Piece
     super
   end
 
-
   def moves
     possible_moves = []
     self.class::POSSIBLE_DIRECTIONS.each do |x_offset, y_offset|
-      temp_x = x
-      temp_y = y
+      temp_x, temp_y = x, y
       until temp_x < 0 || temp_x == @board.dimensions-1 ||
             temp_y < 0 || temp_y == @board.dimensions-1
-        new_x, new_y = [temp_x += x_offset, temp_y += y_offset]
-        pos = [new_x, new_y]
+        pos = [temp_x += x_offset, temp_y += y_offset]
 
         if check_piece_collision?(pos)
           if self.color == @board[pos].color
-            break
-          else
-            possible_moves << pos if new_x.between?(0, @board.dimensions-1) && new_y.between?(0, @board.dimensions-1)
-            break
+            possible_moves << pos if @board.in_bounds?(pos) && !move_into_check?(pos)
           end
+          break
         end
-        possible_moves << pos if new_x.between?(0, @board.dimensions-1) && new_y.between?(0, @board.dimensions-1)
+
+        possible_moves << pos if @board.in_bounds?(pos) && !move_into_check?(pos)
       end
     end
     possible_moves
