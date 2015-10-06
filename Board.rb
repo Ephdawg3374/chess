@@ -59,7 +59,6 @@ class Board
   end
 
   def in_check?(color)
-    return true if checkmate?(color)
 
     king_pos = nil
 
@@ -78,11 +77,6 @@ class Board
     enemy_pieces.any? do |piece|
       piece.valid_moves.include?(king_pos)
     end
-  end
-
-  def checkmate?(color)
-
-
   end
 
   def move(start, end_pos)

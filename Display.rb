@@ -4,6 +4,8 @@ require_relative 'cursorable'
 class Display
   include Cursorable
 
+  attr_reader :cursor_pos
+
   def initialize(board)
     @board = board
     @cursor_pos =  [0,0]
@@ -40,7 +42,7 @@ class Display
   end
 
   def render
-    # system("clear")
+    #system("clear")
     build_grid.each { |row| puts row.join }
   end
 

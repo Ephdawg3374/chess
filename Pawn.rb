@@ -1,9 +1,15 @@
 class Pawn < SteppingPiece
-  POSSIBLE_DIRECTIONS = [
-                    [ 1,  0],
-                    [ 1,  1],
-                    [ 1, -1]
-                    ]
+  # POSSIBLE_DIRECTIONS_WHITE = [
+  #                   [ 1,  0],
+  #                   [ 1,  1],
+  #                   [ 1, -1]
+  #                   ]
+  # POSSIBLE_DIRECTIONS_BLACK = [
+  #                   [ -1,  0],
+  #                   [ -1,  1],
+  #                   [ -1, -1]
+  #                   ]
+
 
   def initialize(position, board, color)
     super
@@ -13,10 +19,10 @@ class Pawn < SteppingPiece
     poss_pos = Array.new
 
     if x == 1 && self.color == :w #whites on top
-      poss_pos << [x+2, y]
+      poss_pos << [x + 2, y]
       super + poss_pos
     elsif x == 6 && self.color == :b #blacks on bottom
-      poss_pos << [x-2, y]
+      poss_pos << [x - 2, y]
       super + poss_pos
     else #non first move
       super

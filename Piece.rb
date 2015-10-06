@@ -16,9 +16,13 @@ class Piece
     @position[1]
   end
 
-  # def move(new_pos)
-  #   @position = new_pos
-  # end
+  def move(new_pos)
+    #reset old position
+    @board[self.position] = nil
+    #set new position
+    @position = new_pos
+    @board[new_pos] = self
+  end
 
   def moves
     possible_moves = self.class::POSSIBLE_DIRECTIONS.map do |x_offset, y_offset|
@@ -41,7 +45,7 @@ class Piece
     possible_moves = self.moves
 
     possible_moves.select! do |move|
-      (@board[move].nil? || @board[move].color != self.color) #&& (move_into_check_flag && !move_into_check)
+      (@board[move].nil? || @board[move].color != self.color)
     end
 
       # @board[move].nil? || @board[move].color != self.color

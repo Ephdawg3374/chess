@@ -15,18 +15,19 @@ class SlidingPiece < Piece
     possible_moves = []
     self.class::POSSIBLE_DIRECTIONS.each do |x_offset, y_offset|
       temp_x, temp_y = x, y
-      until temp_x < 0 || temp_x == @board.dimensions-1 ||
-            temp_y < 0 || temp_y == @board.dimensions-1
+      while @board.in_bounds?([temp_x, temp_y])
+        # temp_x < 0 || temp_x == @board.dimensions-1 ||
+        #     temp_y < 0 || temp_y == @board.dimensions-1
         pos = [temp_x += x_offset, temp_y += y_offset]
 
-        if check_piece_collision?(pos)
+        if @board.in_bounds?(pos) && check_piece_collision?(pos)
           if self.color == @board[pos].color
-            possible_moves << pos if @board.in_bounds?(pos) && !move_into_check?(pos)
+            possible_moves << pos
           end
           break
         end
 
-        possible_moves << pos if @board.in_bounds?(pos) && !move_into_check?(pos)
+        possible_moves << pos if @board.in_bounds?(pos)
       end
     end
     possible_moves
