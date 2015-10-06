@@ -7,6 +7,8 @@ require_relative 'rook'
 require_relative 'bishop'
 require_relative 'queen'
 require_relative 'pawn'
+require_relative 'blackpawn'
+require_relative 'whitepawn'
 require_relative 'knight'
 require 'byebug'
 
@@ -63,9 +65,9 @@ if $PROGRAM_NAME == __FILE__
   # king = x[[4, 3]]
   #p x.deep_dup
   #p x.in_check?(:b)
-  x[[6,7]] = nil
-  p x[[7,7]].valid_moves
-  p x[[6,1]].valid_moves
+  # x[[6,7]] = nil
+  # p x[[7,7]].valid_moves
+  #p x[[6,0]].valid_moves
   game = Game.new(x)
   game.play
 

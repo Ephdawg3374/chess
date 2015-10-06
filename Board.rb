@@ -35,7 +35,7 @@ class Board
       row.each_index do |col_i|
         pos = [row_indx, col_i]
 
-        self[pos] = Pawn.new(pos, self, color)
+        color == :b ? self[pos] = BlackPawn.new(pos, self, :b) : self[pos] = WhitePawn.new(pos, self, :w)
       end
     end
     nil

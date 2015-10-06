@@ -27,7 +27,7 @@ class Piece
   def moves
     possible_moves = self.class::POSSIBLE_DIRECTIONS.map do |x_offset, y_offset|
       [x + x_offset, y + y_offset]
-    end.select { |pos| pos[0].between?(0, @board.dimensions-1) && pos[1].between?(0, @board.dimensions-1) }
+    end.select { |pos| @board.in_bounds?(pos) }
   end
 
   def to_s
