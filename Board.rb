@@ -18,6 +18,7 @@ class Board
 
   def [](pos)
     x, y = pos
+
     @grid[x][y]
   end
 
@@ -30,8 +31,8 @@ class Board
     color == :b ? row_indx = 6 : row_indx = 1
 
     self.grid.each do |row|
-      row.each_index do |i|
-        pos = [row_indx,i]
+      row.each_index do |col_i|
+        pos = [row_indx, col_i]
 
         self[pos] = Pawn.new(pos, self, color)
       end
@@ -56,12 +57,39 @@ class Board
     nil
   end
 
+  def in_check?(color)
+    king_pos = nil
+
+    rows.each_with_index do |row, row_num|
+      found_king = row.find { |piece| piece.class == King && piece.color == color}
+      king_pos = found_king.position if found_king
+      break if king_pos
+    end
+
+    enemy_pieces = []
+
+    rows.each do |row|
+      row.each { |piece| enemy_pieces << piece if !piece.nil? && piece.color != color}
+    end
+    #p enemy_pieces
+    enemy_pieces.any? do |piece|
+
+      piece.valid_moves.include?(king_pos)
+      # print "#{piece.valid_moves} #{piece.class}\n"
+    end
+  end
+
   def move(start, end_pos)
     raise NoPieceError.new("Piece does not exist at #{start}") if self[start].nil?
     raise MoveError.new("Piece can not move to #{end_pos}") if self[start].moves.includes?(end_pos)
     self[end_pos] = self[start]
     self[start] = nil
     nil
+  end
+
+  def in_bounds?(pos)
+    x, y = pos
+    x.between?(0, @dimensions - 1) && y.between?(0, @dimensions - 1)
   end
 
   def rows

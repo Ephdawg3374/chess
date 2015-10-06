@@ -24,7 +24,15 @@ class Pawn < SteppingPiece
   end
 
   def to_s
-    self.color == :b ? "\u265F".encode('utf-8') : "\u2659".encode('utf-8')
+    self.color == :b ? "\u265F".encode : "\u2659".encode
+  end
+
+  def valid_moves
+    possible_moves = moves
+
+    diagonal_moves = possible_moves[1..2].select { |pos| @board[pos].nil? || (@board[pos].color == self.color) }
+
+    possible_moves -= diagonal_moves
   end
 
 end

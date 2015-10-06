@@ -17,4 +17,7 @@ class King < SteppingPiece
     super
   end
 
+  def to_s
+    self.color == :b ? "\u265A".encode : "\u2654".encode
+  end
 end

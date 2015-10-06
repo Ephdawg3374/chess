@@ -7,6 +7,8 @@ class Display
   def initialize(board)
     @board = board
     @cursor_pos =  [0,0]
+
+    @board[@cursor_pos].nil? ? @selected = false : @selected = true
   end
 
   def build_grid
@@ -38,7 +40,7 @@ class Display
   end
 
   def render
-    system("clear")
+    # system("clear")
     build_grid.each { |row| puts row.join }
   end
 

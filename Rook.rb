@@ -13,4 +13,7 @@ class Rook < SlidingPiece
     super
   end
 
+  def to_s
+    self.color == :b ? "\u265C".encode : "\u2656".encode
+  end
 end

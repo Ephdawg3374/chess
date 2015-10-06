@@ -13,5 +13,8 @@ class Queen < SlidingPiece
   def initialize(position, board, color)
     super
   end
-  
+
+  def to_s
+    self.color == :b ? "\u265B".encode : "\u2655".encode
+  end
 end

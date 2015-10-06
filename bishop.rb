@@ -9,4 +9,8 @@ class Bishop < SlidingPiece
   def initialize(position, board, color)
     super
   end
+
+  def to_s
+    self.color == :b ? "\u265D".encode : "\u2657".encode
+  end
 end

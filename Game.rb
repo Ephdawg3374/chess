@@ -8,6 +8,7 @@ require_relative 'bishop'
 require_relative 'queen'
 require_relative 'pawn'
 require_relative 'knight'
+require 'byebug'
 
 class Game
 
@@ -17,8 +18,13 @@ class Game
 
   def play
     display = Display.new(@board)
-    display.render
-    display.get_input
+
+    result = nil
+    until result
+      display.render
+      result = display.get_input
+    end
+    result
 
   end
 
@@ -30,6 +36,12 @@ end
 
 if $PROGRAM_NAME == __FILE__
   x = Board.new
-  g = Game.new(x)
-  g.play
+  pos = [3,4]
+  x[pos] = Rook.new(pos, x, :w)
+  x[[4,4]] = King.new([4,4], x, :b)
+  x[[7, 3]] = nil
+  p x.in_check?(:b)
+  game = Game.new(x)
+  #
+  game.play
 end

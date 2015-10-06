@@ -14,4 +14,7 @@ class Knight < SteppingPiece
     super
   end
 
+  def to_s
+    self.color == :b ? "\u265E".encode : "\u2658".encode
+  end
 end
