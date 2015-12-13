@@ -42,7 +42,7 @@ class Display
   end
 
   def render
-    #system("clear")
+    system("clear")
     build_grid.each { |row| puts row.join }
   end
 

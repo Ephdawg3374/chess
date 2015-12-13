@@ -55,20 +55,3 @@ class Game
   end
 
 end
-
-if $PROGRAM_NAME == __FILE__
-  x = Board.new
-  pos = [4,4]
-  x[pos] = Queen.new(pos, x, :w)
-  # x[[7, 3]] = nil
-  # x[[4, 3]] = King.new([4,3], x, :b)
-  # king = x[[4, 3]]
-  #p x.deep_dup
-  #p x.in_check?(:b)
-  # x[[6,7]] = nil
-  # p x[[7,7]].valid_moves
-  #p x[[6,0]].valid_moves
-  game = Game.new(x)
-  game.play
-
-end
